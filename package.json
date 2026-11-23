@@ -1,0 +1,14 @@
+{
+  "name": "konserin-fullstack",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Konserin Fullstack (React + Vite & NestJS)",
+  "scripts": {
+    "dev": "node -e \"const { spawn } = require('child_process'); const be = spawn('npm', ['--prefix', 'backend', 'run', 'start:dev'], { stdio: 'inherit', shell: true }); const fe = spawn('npm', ['--prefix', 'konserin-frontend', 'run', 'dev'], { stdio: 'inherit', shell: true }); process.on('SIGINT', () => { be.kill(); fe.kill(); process.exit(); });\"",
+    "dev:backend": "npm --prefix backend run start:dev",
+    "dev:frontend": "npm --prefix konserin-frontend run dev",
+    "build": "npm --prefix backend run build && npm --prefix konserin-frontend run build",
+    "install:all": "npm --prefix backend install && npm --prefix konserin-frontend install"
+  }
+}
+

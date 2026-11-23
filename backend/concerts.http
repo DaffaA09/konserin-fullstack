@@ -1,0 +1,80 @@
+@baseUrl = http://localhost:3000
+
+### 1. GET semua konser
+GET {{baseUrl}}/concerts
+
+### 2. GET detail konser berdasarkan ID
+GET {{baseUrl}}/concerts/1
+
+### 3. POST tambah konser baru (Valid)
+POST {{baseUrl}}/concerts
+Content-Type: application/json
+
+{
+  "name": "Java Jazz Festival",
+  "artist": "Maliq & D'Essentials",
+  "category": "Lokal",
+  "date": "2027-03-07",
+  "time": "20:00",
+  "location": "JIExpo Kemayoran, Jakarta",
+  "ticketPrice": 550000,
+  "preSale": "2027-01-15",
+  "generalSale": "2027-01-25",
+  "status": "Tersedia",
+  "description": "Festival musik jazz tahunan di Jakarta dengan penampilan musisi lokal dan mancanegara."
+}
+
+### 4. PATCH ubah konser (ID 4)
+PATCH {{baseUrl}}/concerts/4
+Content-Type: application/json
+
+{
+  "ticketPrice": 650000,
+  "status": "Segera hadir"
+}
+
+### 5. DELETE hapus konser (ID 4)
+DELETE {{baseUrl}}/concerts/4
+
+### 6. [Error Test] Input tidak valid (400 Bad Request)
+POST {{baseUrl}}/concerts
+Content-Type: application/json
+
+{
+  "name": "AB",
+  "artist": "",
+  "category": "Indie",
+  "date": "bukan-tanggal",
+  "location": "JKT",
+  "ticketPrice": -50000,
+  "status": "Unknown"
+}
+
+### 7. [Error Test] Data duplikat nama dan tanggal (409 Conflict)
+POST {{baseUrl}}/concerts
+Content-Type: application/json
+
+{
+  "name": "Semesta Berpesta",
+  "artist": "Tulus",
+  "category": "Lokal",
+  "date": "2026-11-21",
+  "location": "Stadion Madya, Jakarta",
+  "ticketPrice": 250000,
+  "status": "Tersedia"
+}
+
+### 8. [Error Test] GET ID tidak ditemukan (404 Not Found)
+GET {{baseUrl}}/concerts/999
+
+### 9. [Error Test] PATCH ID tidak ditemukan (404 Not Found)
+PATCH {{baseUrl}}/concerts/999
+Content-Type: application/json
+
+{
+  "status": "Habis"
+}
+
+### 10. [Error Test] DELETE ID tidak ditemukan (404 Not Found)
+DELETE {{baseUrl}}/concerts/999
+
